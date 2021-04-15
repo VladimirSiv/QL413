@@ -1,0 +1,43 @@
+\chapter{Dioscuri}
+\label{dioscuri}
+\begin{chapquote}{}
+Nam vestibulum volutpat orci eu congue. Praesent et dolor ...
+\end{chapquote}
+\section{Comae}
+
+Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over \codevar{2000 years} old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a \codevar{Lorem Ipsum} passage, and going through the cites of the word in classical literature, discovered the undoubtable source.
+
+\begin{note}
+The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 for more information visit \href{https://en.wikipedia.org/wiki/Lorem_ipsum}{Lorem}.
+\end{note}
+
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+bgcolor=codeGray,
+fontsize=\footnotesize,
+]
+{python}
+class TransitionError(Error):
+    """Raised when an operation attempts a state transition that's not
+    allowed.
+
+    Attributes:
+        previous -- state at beginning of transition
+        next -- attempted new state
+        message -- explanation of why the specific transition is not allowed
+    """
+
+    def __init__(self, previous, next, message):
+        self.previous = previous
+        self.next = next
+        self.message = message
+\end{minted}
+
+There are many variations of passages of \codevar{Lorem Ipsum} available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of \codevar{Lorem Ipsum}, you...
+
+\begin{note}
+Jump to appendix section \nameref{appendix:zkn-981}
+\end{note}

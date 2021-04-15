@@ -1,0 +1,6 @@
+*.log
+*.out
+*.gz
+*.toc
+*.aux
+*_minted-main/

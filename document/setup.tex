@@ -1,0 +1,150 @@
+%
+% ======= Packages
+%
+
+\usepackage[bottom=2cm,top=2cm,left=3cm,right=3cm]{geometry}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{titlesec}
+\usepackage{tikz}
+\usepackage{import}
+\usepackage{minted}
+\usepackage[toc,page]{appendix}
+\usepackage{tocloft}
+\usepackage[strict]{changepage}
+\usepackage{framed}
+\usepackage{hyperref}
+
+%
+% ======= Colors
+%
+
+\definecolor{documentColor}{cmyk}{.84,.39,0,.06}
+\definecolor{codeGray}{RGB}{245,245,245}
+
+%
+% ======= Configuration
+%
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=documentColor,
+    filecolor=magenta,
+    urlcolor=documentColor,
+}
+\setlength\parindent{0pt}
+\usemintedstyle{tango}
+
+%
+% ======= Commands
+%
+
+\newcommand{\ColoredRule}[3][documentColor]{\textcolor{#1}{\rule{#2}{#3}}}
+
+\newcommand{\codevar}[1]{\colorbox{codeGray}{\texttt{#1}}}
+
+\newlength{\seplinewidth}
+\newlength{\seplinesep}
+\setlength{\seplinewidth}{0.5mm}
+\setlength{\seplinesep}{2mm}
+\newcommand*{\sepline}{%
+  \par
+  \vspace{\dimexpr\seplinesep+.5\parskip}%
+  \cleaders\vbox{%
+    \begingroup % because of color
+      \color{documentColor}%
+      \hrule width\linewidth height\seplinewidth
+    \endgroup
+  }\vskip\seplinewidth
+  \vspace{\dimexpr\seplinesep-.5\parskip}%
+}
+
+\renewcommand{\cftaftertoctitle}{\\\sepline\vspace*{3ex}}
+
+\newcommand\titlepagedecoration{%
+\begin{tikzpicture}[remember picture,overlay,shorten >= -10pt]
+
+\coordinate (aux1) at ([yshift=-15pt]current page.north east);
+\coordinate (aux2) at ([yshift=-410pt]current page.north east);
+\coordinate (aux3) at ([xshift=-4.5cm]current page.north east);
+\coordinate (aux4) at ([yshift=-150pt]current page.north east);
+
+\begin{scope}[documentColor!40,line width=12pt,rounded corners=12pt]
+\draw
+  (aux1) -- coordinate (a)
+  ++(225:5) --
+  ++(-45:5.1) coordinate (b);
+\draw[shorten <= -10pt]
+  (aux3) --
+  (a) --
+  (aux1);
+\draw[opacity=0.6,documentColor,shorten <= -10pt]
+  (b) --
+  ++(225:2.2) --
+  ++(-45:2.2);
+\end{scope}
+\draw[documentColor,line width=8pt,rounded corners=8pt,shorten <= -10pt]
+  (aux4) --
+  ++(225:0.8) --
+  ++(-45:0.8);
+\begin{scope}[documentColor!70,line width=6pt,rounded corners=8pt]
+\draw[shorten <= -10pt]
+  (aux2) --
+  ++(225:3) coordinate[pos=0.45] (c) --
+  ++(-45:3.1);
+\draw
+  (aux2) --
+  (c) --
+  ++(135:2.5) --
+  ++(45:2.5) --
+  ++(-45:2.5) coordinate[pos=0.3] (d);   
+\draw 
+  (d) -- +(45:1);
+\end{scope}
+\end{tikzpicture}%
+}
+
+  
+%
+% ======= Environments
+%
+
+\makeatletter
+\newenvironment{chapquote}[2][2em]
+  {\setlength{\@tempdima}{#1}%
+   \def\chapquote@author{#2}%
+   \parshape 1 \@tempdima \dimexpr\textwidth-2\@tempdima\relax%
+   \itshape}
+  {\par\normalfont\hfill \chapquote@author\hspace*{\@tempdima}\par\bigskip}
+\makeatother
+
+\newenvironment{note}{%
+  \def\FrameCommand{%
+    \hspace{1pt}%
+    {\color{documentColor}\vrule width 2pt}%
+    {\color{codeGray}\vrule width 4pt}%
+    \colorbox{codeGray}%
+  }%
+  \MakeFramed{\advance\hsize-\width\FrameRestore}%
+  \noindent\hspace{-4.55pt}% disable indenting first paragraph
+  \begin{adjustwidth}{}{7pt}%
+  \vspace{2pt}\vspace{2pt}%
+}
+{%
+  \vspace{2pt}\end{adjustwidth}\endMakeFramed%
+}
+
+%
+% ======= Title
+%
+
+\font\titlefont=cmr12 at 40pt
+
+\titleformat{\chapter}[display]
+  {\normalfont\Large\raggedleft}
+  {\MakeUppercase{\chaptertitlename}%
+    \rlap{ \resizebox{!}{1.5cm}{\thechapter}\ColoredRule{5cm}{1.5cm}}\sepline}
+  {10pt}{\Huge}
+  
+\titlespacing*{\chapter}{0pt}{30pt}{20pt}
+
